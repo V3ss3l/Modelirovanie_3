@@ -20,10 +20,10 @@ namespace Modelirovanie_3
             InitializeComponent();
             mathObject = new MathClass(this);
             _randomType = true;
-            this.chart1.Palette = ChartColorPalette.Excel;
+            this.chart1.Palette = ChartColorPalette.SeaGreen;
             this.chart1.Titles.Add("f(x)");
             this.chart1.Series.RemoveAt(0);
-            this.chart2.Palette = ChartColorPalette.Excel;
+            this.chart2.Palette = ChartColorPalette.Fire;
             this.chart2.Titles.Add("F(x)");
             this.chart2.Series.RemoveAt(0);
         }
@@ -42,15 +42,18 @@ namespace Modelirovanie_3
         {
             if (_randomType)
             {
-                mathObject.GenerateSequenceForArrM((int)numericSeqLen.Value);
-                double[] buffArr = mathObject.ExpectedValue();
+                double[] buffArr = mathObject.Start((int) numericSeqLen.Value);
                 listView1.Items.Add((listView1.Items.Count + 1 +") ") + "Mx = " + buffArr[0] + "\n" +" Dx = " + buffArr[1]);
             }
-            Series series_1 = this.chart1.Series.Add(listView1.Items.Count.ToString());
-            //Series series_2 = this.chart2.Series.Add(listView1.Items.Count.ToString());
-            for (int i = 0; i < mathObject.arrM.Length; i++)
+            Series series_1 = this.chart1.Series.Add(listView1.Items.Count.ToString() +" - " + numericSeqLen.Value);
+            Series series_2 = this.chart2.Series.Add(listView1.Items.Count.ToString() +" - " + numericSeqLen.Value);
+            series_2.ChartType = SeriesChartType.Line;
+            for (int i = 0; i < 100; i++)
             {
                 series_1.Points.Add(mathObject.arrM[i]);
+                series_2.Points.AddXY(i, mathObject.arrP[i]);
+                series_2.Points.AddXY(i+1, mathObject.arrP[i]);
+
             }
         }
     }

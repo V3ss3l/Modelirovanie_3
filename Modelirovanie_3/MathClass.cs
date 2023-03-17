@@ -10,8 +10,8 @@ namespace Modelirovanie_3
     internal class MathClass
     {
         private Form1 _mainForm;
-        public int[] arrM;
-        private int[] arrP;
+        public int[] arrM { get; set; }
+        public int[] arrP { get; set; }
         private Random rand;
 
         public MathClass(Form1 mainForm)
@@ -20,6 +20,13 @@ namespace Modelirovanie_3
             this.arrM = new int[100];
             this.arrP = new int[100];
             rand = new Random();
+        }
+
+        public double[] Start(int lenOfSeq)
+        {
+            GenerateSequenceForArrM(lenOfSeq);
+            GenerateSequenceForArrP();
+            return ExpectedValue();
         }
 
         /// <summary>
@@ -35,6 +42,15 @@ namespace Modelirovanie_3
 
         }
 
+        public void GenerateSequenceForArrP()
+        {
+            arrP[0] = 0;
+            arrP[1] = arrM[0];
+            for (int i = 2; i < arrP.Length; i++)
+            {
+                arrP[i] = arrP[i - 1] + arrM[i - 1];
+            }
+        }
         /// <summary>
         /// Метод для нахождения математического ожидания СВ Х
         /// </summary>
