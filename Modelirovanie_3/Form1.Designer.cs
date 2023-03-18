@@ -35,7 +35,7 @@
             System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.numericForPi = new System.Windows.Forms.NumericUpDown();
             this.buttonClear = new System.Windows.Forms.Button();
             this.buttonStart = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
@@ -46,8 +46,10 @@
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.chart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.labelPi = new System.Windows.Forms.Label();
+            this.buttonForPi = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericForPi)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericSeqLen)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
@@ -58,7 +60,9 @@
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel1.Controls.Add(this.numericUpDown2);
+            this.panel1.Controls.Add(this.buttonForPi);
+            this.panel1.Controls.Add(this.labelPi);
+            this.panel1.Controls.Add(this.numericForPi);
             this.panel1.Controls.Add(this.buttonClear);
             this.panel1.Controls.Add(this.buttonStart);
             this.panel1.Controls.Add(this.listView1);
@@ -70,25 +74,25 @@
             this.panel1.Size = new System.Drawing.Size(218, 943);
             this.panel1.TabIndex = 0;
             // 
-            // numericUpDown2
+            // numericForPi
             // 
-            this.numericUpDown2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.numericUpDown2.Location = new System.Drawing.Point(10, 735);
-            this.numericUpDown2.Maximum = new decimal(new int[] {
+            this.numericForPi.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.numericForPi.Location = new System.Drawing.Point(10, 735);
+            this.numericForPi.Maximum = new decimal(new int[] {
             10000,
             0,
             0,
             0});
-            this.numericUpDown2.Minimum = new decimal(new int[] {
+            this.numericForPi.Minimum = new decimal(new int[] {
             100,
             0,
             0,
             0});
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(195, 26);
-            this.numericUpDown2.TabIndex = 6;
-            this.numericUpDown2.ThousandsSeparator = true;
-            this.numericUpDown2.Value = new decimal(new int[] {
+            this.numericForPi.Name = "numericForPi";
+            this.numericForPi.Size = new System.Drawing.Size(195, 26);
+            this.numericForPi.TabIndex = 6;
+            this.numericForPi.ThousandsSeparator = true;
+            this.numericForPi.Value = new decimal(new int[] {
             100,
             0,
             0,
@@ -233,6 +237,27 @@
             this.chart2.TabIndex = 2;
             this.chart2.Text = "chart2";
             // 
+            // labelPi
+            // 
+            this.labelPi.AutoSize = true;
+            this.labelPi.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelPi.Location = new System.Drawing.Point(6, 823);
+            this.labelPi.Name = "labelPi";
+            this.labelPi.Size = new System.Drawing.Size(36, 20);
+            this.labelPi.TabIndex = 7;
+            this.labelPi.Text = "P = ";
+            // 
+            // buttonForPi
+            // 
+            this.buttonForPi.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonForPi.Location = new System.Drawing.Point(8, 767);
+            this.buttonForPi.Name = "buttonForPi";
+            this.buttonForPi.Size = new System.Drawing.Size(193, 39);
+            this.buttonForPi.TabIndex = 8;
+            this.buttonForPi.Text = "Рассчитать";
+            this.buttonForPi.UseVisualStyleBackColor = true;
+            this.buttonForPi.Click += new System.EventHandler(this.buttonForPi_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -244,7 +269,8 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
+            this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericForPi)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericSeqLen)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -263,11 +289,13 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
+        private System.Windows.Forms.NumericUpDown numericForPi;
         private System.Windows.Forms.Button buttonClear;
         private System.Windows.Forms.Button buttonStart;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart2;
+        private System.Windows.Forms.Button buttonForPi;
+        private System.Windows.Forms.Label labelPi;
     }
 }
 

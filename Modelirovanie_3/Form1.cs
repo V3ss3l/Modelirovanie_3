@@ -14,11 +14,11 @@ namespace Modelirovanie_3
     public partial class Form1 : Form
     {
         private MathClass mathObject;
-        private bool _randomType;
+        public bool _randomType { get; set; }
         public Form1()
         {
             InitializeComponent();
-            mathObject = new MathClass(this);
+            mathObject = new MathClass(this, 1);
             _randomType = true;
             this.chart1.Palette = ChartColorPalette.Bright;
             this.chart1.Titles.Add("f(x)");
@@ -40,28 +40,30 @@ namespace Modelirovanie_3
 
         private void buttonStart_Click(object sender, EventArgs e)
         {
-            if (_randomType)
-            {
-                double[] buffArr = mathObject.Start((int) numericSeqLen.Value);
-                listView1.Items.Add((listView1.Items.Count + 1 +") ") + "Mx = " + buffArr[0] + "\n" +" Dx = " + buffArr[1]);
-            }
-            Series series_1 = this.chart1.Series.Add(listView1.Items.Count.ToString() +" - " + numericSeqLen.Value);
-            Series series_2 = this.chart2.Series.Add(listView1.Items.Count.ToString() +" - " + numericSeqLen.Value);
+            double[] buffArr = mathObject.Start((int)numericSeqLen.Value);
+            listView1.Items.Add((listView1.Items.Count + 1 + ") ") + "Mx = " + buffArr[0] + "\n" + " Dx = " + buffArr[1]);
+            Series series_1 = this.chart1.Series.Add(listView1.Items.Count.ToString() + " - " + numericSeqLen.Value);
+            Series series_2 = this.chart2.Series.Add(listView1.Items.Count.ToString() + " - " + numericSeqLen.Value);
             series_2.ChartType = SeriesChartType.Line;
             for (int i = 0; i < 100; i++)
             {
                 series_1.Points.Add(mathObject.arrM[i]);
-                series_2.Points.AddXY(i+1, mathObject.arrP[i]);
-                series_2.Points.AddXY(i+2, mathObject.arrP[i]);
+                series_2.Points.AddXY(i + 1, mathObject.arrP[i]);
+                series_2.Points.AddXY(i + 2, mathObject.arrP[i]);
             }
         }
 
         private void buttonClear_Click(object sender, EventArgs e)
         {
-            mathObject = new MathClass(this);
+            mathObject = new MathClass(this, 1);
             chart1.Series.Clear();
             chart2.Series.Clear();
             listView1.Items.Clear();
+        }
+
+        private void buttonForPi_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
