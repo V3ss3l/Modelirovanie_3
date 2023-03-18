@@ -20,10 +20,10 @@ namespace Modelirovanie_3
             InitializeComponent();
             mathObject = new MathClass(this);
             _randomType = true;
-            this.chart1.Palette = ChartColorPalette.SeaGreen;
+            this.chart1.Palette = ChartColorPalette.Bright;
             this.chart1.Titles.Add("f(x)");
             this.chart1.Series.RemoveAt(0);
-            this.chart2.Palette = ChartColorPalette.Fire;
+            this.chart2.Palette = ChartColorPalette.Bright;
             this.chart2.Titles.Add("F(x)");
             this.chart2.Series.RemoveAt(0);
         }
@@ -51,10 +51,17 @@ namespace Modelirovanie_3
             for (int i = 0; i < 100; i++)
             {
                 series_1.Points.Add(mathObject.arrM[i]);
-                series_2.Points.AddXY(i, mathObject.arrP[i]);
                 series_2.Points.AddXY(i+1, mathObject.arrP[i]);
-
+                series_2.Points.AddXY(i+2, mathObject.arrP[i]);
             }
+        }
+
+        private void buttonClear_Click(object sender, EventArgs e)
+        {
+            mathObject = new MathClass(this);
+            chart1.Series.Clear();
+            chart2.Series.Clear();
+            listView1.Items.Clear();
         }
     }
 }

@@ -10,29 +10,32 @@ namespace Modelirovanie_3
     internal class MathClass
     {
         private Form1 _mainForm;
-        public int[] arrM { get; set; }
-        public int[] arrP { get; set; }
+        public double[] arrM { get; set; }
+        public double[] arrP { get; set; }
         private Random rand;
 
         public MathClass(Form1 mainForm)
         {
             _mainForm = mainForm;
-            this.arrM = new int[100];
-            this.arrP = new int[100];
+            this.arrM = new double[100];
+            this.arrP = new double[100];
             rand = new Random();
         }
 
         public double[] Start(int lenOfSeq)
         {
+            arrM = new double[100];
             GenerateSequenceForArrM(lenOfSeq);
+            double[] buff = ExpectedValue(lenOfSeq);
+            TransitValuesFromArrM();
             GenerateSequenceForArrP();
-            return ExpectedValue();
+            return buff;
         }
 
         /// <summary>
         /// Метод для генерации чисел
         /// </summary>
-        public void GenerateSequenceForArrM(int lenOfSeq)
+        private void GenerateSequenceForArrM(int lenOfSeq)
         {
             for (int i = 0; i < lenOfSeq; i++)
             {
@@ -42,7 +45,13 @@ namespace Modelirovanie_3
 
         }
 
-        public void GenerateSequenceForArrP()
+        private void TransitValuesFromArrM()
+        {
+            for (int i = 0; i < arrM.Length; i++)
+                arrM[i] = arrM[i] / arrM.Length;
+        }
+
+        private void GenerateSequenceForArrP()
         {
             arrP[0] = 0;
             arrP[1] = arrM[0];
@@ -54,26 +63,23 @@ namespace Modelirovanie_3
         /// <summary>
         /// Метод для нахождения математического ожидания СВ Х
         /// </summary>
-        public double[] ExpectedValue()
+        private double[] ExpectedValue(int lenOfSeq)
         {
             double mathExpected = 0;
             double p = 0;
             double disp = 0;
             for (int i = 0; i < arrM.Length; i++)
             {
-                p = arrM[i] / (double) arrM.Length;
+                p = arrM[i] / (double) lenOfSeq;
                 mathExpected += i * p;
                 disp += DispersionOfSequence(mathExpected, i, p);
             }
-            return new[] { mathExpected, disp};
+            return new[] { mathExpected, disp };
         }
 
         /// <summary>
         /// Метод для нахождения Дисперсии СВ Х
         /// </summary>
-        public double DispersionOfSequence(double ExpectedValue, int Xi, double Pi)
-        {
-            return Math.Pow((Xi - ExpectedValue), 2) * Pi;
-        }
+        private double DispersionOfSequence(double ExpectedValue, int Xi, double Pi) => Math.Pow(Xi - ExpectedValue, 2) * Pi;
     }
 }
