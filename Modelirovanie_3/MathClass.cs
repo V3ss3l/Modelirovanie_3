@@ -10,19 +10,17 @@ namespace Modelirovanie_3
     internal class MathClass
     {
         #region Const
-        private const int a = 16807;
-        private const int m = 2147483647;
-        private const int q = 127773;
-        private const int r = 2836;
+        private const int A = 16807;
+        private const int M = 2147483647;
         #endregion
         private Form1 _mainForm;
         public double[] arrM { get; set; }
         public double[] arrP { get; set; }
         private Random rand;
-        private int seed;
+        private double seed;
+        private int lenOfSeq;
 
-
-        public MathClass(Form1 mainForm, int seed)
+        public MathClass(Form1 mainForm, double seed)
         {
             _mainForm = mainForm;
             this.seed = seed;
@@ -33,25 +31,28 @@ namespace Modelirovanie_3
 
         public double[] Start(int lenOfSeq)
         {
+            this.lenOfSeq = lenOfSeq;
             arrM = new double[100];
-            GenerateSequenceForArrM(lenOfSeq);
-            double[] buff = ExpectedValue(lenOfSeq);
+            arrP = new double[100];
+            GenerateSequenceForArrM();
+            double[] buff = ExpectedValue();
             TransitValuesFromArrM();
             GenerateSequenceForArrP();
             return buff;
         }
 
-        public int GetLehmerNumber() => (int)((100 - 0) * Lehmer() + 0);
+        public int LehmerN(int N) => (int) (N * Lehmer());
+
         /// <summary>
         /// Метод для генерации чисел
         /// </summary>
-        private void GenerateSequenceForArrM(int lenOfSeq)
+        private void GenerateSequenceForArrM()
         {
             int number = 0;
             for (int i = 0; i < lenOfSeq; i++)
             {
                 if (_mainForm._randomType) number = rand.Next(100);
-                else number = GetLehmerNumber();
+                else number = LehmerN(100);
                 arrM[number]++;
             }
 
@@ -60,7 +61,7 @@ namespace Modelirovanie_3
         private void TransitValuesFromArrM()
         {
             for (int i = 0; i < arrM.Length; i++)
-                arrM[i] = arrM[i] / arrM.Length;
+                arrM[i] = arrM[i] / lenOfSeq;
         }
 
         private void GenerateSequenceForArrP()
@@ -75,18 +76,19 @@ namespace Modelirovanie_3
         /// <summary>
         /// Метод для нахождения математического ожидания СВ Х
         /// </summary>
-        private double[] ExpectedValue(int lenOfSeq)
+        private double[] ExpectedValue()
         {
-            double mathExpected = 0;
-            double p = 0;
-            double disp = 0;
-            for (int i = 0; i < arrM.Length; i++)
+            double mathExpected1 = 0;
+            double mathExpected2 = 0;
+            for (var xi = 0; xi < arrM.Length; xi++)
             {
-                p = arrM[i] / (double)lenOfSeq;
-                mathExpected += i * p;
-                disp += DispersionOfSequence(mathExpected, i, p);
+                var p = arrM[xi] / lenOfSeq;
+                mathExpected1 += xi * p;
+                mathExpected2 += xi * xi * p;
             }
-            return new[] { mathExpected, disp };
+
+            var dsp = mathExpected2 - mathExpected1 * mathExpected1;
+            return new[] { mathExpected1, dsp };
         }
 
         /// <summary>
@@ -94,14 +96,27 @@ namespace Modelirovanie_3
         /// </summary>
         private double DispersionOfSequence(double ExpectedValue, int Xi, double Pi) => Math.Pow(Xi - ExpectedValue, 2) * Pi;
 
-        private double Lehmer()
+        /// <summary>
+        /// Метод генерирующий число по алгоритму Лемера (с журнала Microsoft) 
+        /// </summary>
+        /// <returns></returns>
+        /*private double Lehmer()
         {
             int hi = seed / q;
             int lo = seed % q;
-            seed = (a * lo) - (r * hi);
+            seed = (A * lo) - (r * hi);
             if (seed <= 0)
                 seed = seed + m;
             return (seed * 1.0) / m;
+        }*/
+
+        /// <summary>
+        /// Метод генерирующий числа по алгоритму Лемера из лекции
+        /// </summary>
+        private double Lehmer()
+        {
+            seed = (A * seed) % M;
+            return seed / M;
         }
     }
 }    
