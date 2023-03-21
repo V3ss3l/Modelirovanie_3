@@ -40,30 +40,44 @@ namespace Modelirovanie_3
             GenerateSequenceForArrP();
             return buff;
         }
-
-        public int LehmerN(int N) => (int) (N * Lehmer());
+        /// <summary>
+        /// Метод, 
+        /// </summary>
+        /// <param name="lenOfSeq"></param>
+        /// <returns></returns>
+        public double CalculatePi(int lenOfSeq)
+        {
+            double Ncirc = 0;
+            double Nmax = lenOfSeq;
+            for (int i = 0; i < Nmax; i++)
+            {
+                var X = Lehmer();
+                var Y = Lehmer();
+                if (Circle(X, Y) <= 1.0)
+                {
+                    Ncirc++;
+                }
+            }
+            return (Ncirc / Nmax) * 4;
+        }
 
         /// <summary>
-        /// Метод для генерации чисел
+        /// Метод Генерации значений для массива М
         /// </summary>
         private void GenerateSequenceForArrM()
         {
             int number = 0;
             for (int i = 0; i < lenOfSeq; i++)
             {
-                if (_mainForm._randomType) number = rand.Next(100);
+                if (_mainForm.RandomType) number = rand.Next(100);
                 else number = LehmerN(100);
                 arrM[number]++;
             }
 
         }
-
-        private void TransitValuesFromArrM()
-        {
-            for (int i = 0; i < arrM.Length; i++)
-                arrM[i] = arrM[i] / lenOfSeq;
-        }
-
+        /// <summary>
+        /// Метод Заполнение массива P
+        /// </summary>
         private void GenerateSequenceForArrP()
         {
             arrP[0] = 0;
@@ -73,8 +87,18 @@ namespace Modelirovanie_3
                 arrP[i] = arrP[i - 1] + arrM[i - 1];
             }
         }
+
         /// <summary>
-        /// Метод для нахождения математического ожидания СВ Х
+        /// Перевод значений массива М в вероятность (Пример 5 -> 0,05)
+        /// </summary>
+        private void TransitValuesFromArrM()
+        {
+            for (int i = 0; i < arrM.Length; i++)
+                arrM[i] = arrM[i] / lenOfSeq;
+        }
+
+        /// <summary>
+        /// Метод для нахождения математического ожидания и дисперсии СВ X
         /// </summary>
         private double[] ExpectedValue()
         {
@@ -93,12 +117,21 @@ namespace Modelirovanie_3
 
 
         /// <summary>
-        /// Метод генерирующий числа по алгоритму Лемера из лекции
+        /// Метод генерирующий числа по алгоритму Лемера в пределах [0;1)
         /// </summary>
         private double Lehmer()
         {
             seed = (A * seed) % M;
             return seed / M;
         }
+
+        /// <summary>
+        /// Метод, генерирующий целые числа по алгоритму Лемера в пределах [0;N -1]
+        /// </summary>
+        /// <param name="N"></param>
+        /// <returns></returns>
+        private int LehmerN(int N) => (int)(N * Lehmer());
+
+        private double Circle(double x, double y) => Math.Sqrt(Math.Pow(x, 2) + Math.Pow(y,2));
     }
 }    

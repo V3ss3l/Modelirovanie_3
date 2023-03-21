@@ -90,6 +90,7 @@
             this.labelPi.AutoSize = true;
             this.labelPi.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.labelPi.Location = new System.Drawing.Point(6, 823);
+            this.labelPi.MaximumSize = new System.Drawing.Size(193, 60);
             this.labelPi.Name = "labelPi";
             this.labelPi.Size = new System.Drawing.Size(36, 20);
             this.labelPi.TabIndex = 7;

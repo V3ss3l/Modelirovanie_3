@@ -13,13 +13,18 @@ namespace Modelirovanie_3
 {
     public partial class Form1 : Form
     {
+        private enum RandomTypeEnum
+        {
+            Лемер, Встроенный
+        }
         private MathClass mathObject;
-        public bool _randomType { get; set; }
+        public bool RandomType { get; set; }
+        private RandomTypeEnum type;
         public Form1()
         {
             InitializeComponent();
             mathObject = new MathClass(this, 1);
-            _randomType = true;
+            RandomType = true;
             this.chart1.Palette = ChartColorPalette.Bright;
             this.chart1.Titles.Add("f(x)");
             this.chart1.Series.RemoveAt(0);
@@ -30,20 +35,22 @@ namespace Modelirovanie_3
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
-            _randomType = true;
+            RandomType = true;
+            type = RandomTypeEnum.Встроенный;
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
-            _randomType = false;
+            RandomType = false;
+            type = RandomTypeEnum.Лемер;
         }
 
         private void buttonStart_Click(object sender, EventArgs e)
         {
             double[] buffArr = mathObject.Start((int)numericSeqLen.Value);
             listView1.Items.Add((listView1.Items.Count + 1 + ") ") + "Mx = " + buffArr[0].ToString("#.###") + "\n" + " Dx = " + buffArr[1].ToString("#.###"));
-            Series series_1 = this.chart1.Series.Add(listView1.Items.Count.ToString() + " - " + numericSeqLen.Value);
-            Series series_2 = this.chart2.Series.Add(listView1.Items.Count.ToString() + " - " + numericSeqLen.Value);
+            Series series_1 = this.chart1.Series.Add(listView1.Items.Count.ToString() + " - " + numericSeqLen.Value + " - " + type);
+            Series series_2 = this.chart2.Series.Add(listView1.Items.Count.ToString() + " - " + numericSeqLen.Value + " - " + type);
             series_2.ChartType = SeriesChartType.Line;
             for (int i = 0; i < 100; i++)
             {
@@ -59,11 +66,12 @@ namespace Modelirovanie_3
             chart1.Series.Clear();
             chart2.Series.Clear();
             listView1.Items.Clear();
+            labelPi.Text = "P = ";
         }
 
         private void buttonForPi_Click(object sender, EventArgs e)
         {
-
+            labelPi.Text = "P = " + mathObject.CalculatePi((int)numericForPi.Value);
         }
     }
 }
