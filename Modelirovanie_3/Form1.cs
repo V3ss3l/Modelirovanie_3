@@ -41,7 +41,7 @@ namespace Modelirovanie_3
         private void buttonStart_Click(object sender, EventArgs e)
         {
             double[] buffArr = mathObject.Start((int)numericSeqLen.Value);
-            listView1.Items.Add((listView1.Items.Count + 1 + ") ") + "Mx = " + buffArr[0] + "\n" + " Dx = " + buffArr[1]);
+            listView1.Items.Add((listView1.Items.Count + 1 + ") ") + "Mx = " + buffArr[0].ToString("#.###") + "\n" + " Dx = " + buffArr[1].ToString("#.###"));
             Series series_1 = this.chart1.Series.Add(listView1.Items.Count.ToString() + " - " + numericSeqLen.Value);
             Series series_2 = this.chart2.Series.Add(listView1.Items.Count.ToString() + " - " + numericSeqLen.Value);
             series_2.ChartType = SeriesChartType.Line;

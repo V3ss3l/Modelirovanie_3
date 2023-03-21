@@ -35,6 +35,8 @@
             System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.buttonForPi = new System.Windows.Forms.Button();
+            this.labelPi = new System.Windows.Forms.Label();
             this.numericForPi = new System.Windows.Forms.NumericUpDown();
             this.buttonClear = new System.Windows.Forms.Button();
             this.buttonStart = new System.Windows.Forms.Button();
@@ -46,8 +48,6 @@
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.chart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.labelPi = new System.Windows.Forms.Label();
-            this.buttonForPi = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericForPi)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericSeqLen)).BeginInit();
@@ -73,6 +73,27 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(218, 943);
             this.panel1.TabIndex = 0;
+            // 
+            // buttonForPi
+            // 
+            this.buttonForPi.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonForPi.Location = new System.Drawing.Point(8, 767);
+            this.buttonForPi.Name = "buttonForPi";
+            this.buttonForPi.Size = new System.Drawing.Size(193, 39);
+            this.buttonForPi.TabIndex = 8;
+            this.buttonForPi.Text = "Рассчитать";
+            this.buttonForPi.UseVisualStyleBackColor = true;
+            this.buttonForPi.Click += new System.EventHandler(this.buttonForPi_Click);
+            // 
+            // labelPi
+            // 
+            this.labelPi.AutoSize = true;
+            this.labelPi.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelPi.Location = new System.Drawing.Point(6, 823);
+            this.labelPi.Name = "labelPi";
+            this.labelPi.Size = new System.Drawing.Size(36, 20);
+            this.labelPi.TabIndex = 7;
+            this.labelPi.Text = "P = ";
             // 
             // numericForPi
             // 
@@ -129,7 +150,7 @@
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(195, 422);
             this.listView1.TabIndex = 1;
-            this.listView1.TileSize = new System.Drawing.Size(190, 50);
+            this.listView1.TileSize = new System.Drawing.Size(190, 70);
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Tile;
             // 
@@ -236,27 +257,6 @@
             this.chart2.Size = new System.Drawing.Size(878, 455);
             this.chart2.TabIndex = 2;
             this.chart2.Text = "chart2";
-            // 
-            // labelPi
-            // 
-            this.labelPi.AutoSize = true;
-            this.labelPi.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelPi.Location = new System.Drawing.Point(6, 823);
-            this.labelPi.Name = "labelPi";
-            this.labelPi.Size = new System.Drawing.Size(36, 20);
-            this.labelPi.TabIndex = 7;
-            this.labelPi.Text = "P = ";
-            // 
-            // buttonForPi
-            // 
-            this.buttonForPi.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonForPi.Location = new System.Drawing.Point(8, 767);
-            this.buttonForPi.Name = "buttonForPi";
-            this.buttonForPi.Size = new System.Drawing.Size(193, 39);
-            this.buttonForPi.TabIndex = 8;
-            this.buttonForPi.Text = "Рассчитать";
-            this.buttonForPi.UseVisualStyleBackColor = true;
-            this.buttonForPi.Click += new System.EventHandler(this.buttonForPi_Click);
             // 
             // Form1
             // 

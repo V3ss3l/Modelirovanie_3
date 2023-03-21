@@ -91,24 +91,6 @@ namespace Modelirovanie_3
             return new[] { mathExpected1, dsp };
         }
 
-        /// <summary>
-        /// Метод для нахождения Дисперсии СВ Х
-        /// </summary>
-        private double DispersionOfSequence(double ExpectedValue, int Xi, double Pi) => Math.Pow(Xi - ExpectedValue, 2) * Pi;
-
-        /// <summary>
-        /// Метод генерирующий число по алгоритму Лемера (с журнала Microsoft) 
-        /// </summary>
-        /// <returns></returns>
-        /*private double Lehmer()
-        {
-            int hi = seed / q;
-            int lo = seed % q;
-            seed = (A * lo) - (r * hi);
-            if (seed <= 0)
-                seed = seed + m;
-            return (seed * 1.0) / m;
-        }*/
 
         /// <summary>
         /// Метод генерирующий числа по алгоритму Лемера из лекции
