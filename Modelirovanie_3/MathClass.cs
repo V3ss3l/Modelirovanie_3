@@ -11,7 +11,11 @@ namespace Modelirovanie_3
     {
         #region Const
         private const int A = 16807;
+        private const int B = 0;
         private const int M = 2147483647;
+        private const int A_1 = 25173;
+        private const int B_1 = 13849;
+        private const int C_1 = 65536;
         #endregion
         private Form1 _mainForm;
         public double[] arrM { get; set; }
@@ -115,14 +119,15 @@ namespace Modelirovanie_3
             return new[] { mathExpected1, dsp };
         }
 
+        //private double DispersionOfSequence(double ExpectedValue, int Xi, double Pi) => Math.Pow(Xi - ExpectedValue, 2) * Pi;
 
         /// <summary>
         /// Метод генерирующий числа по алгоритму Лемера в пределах [0;1)
         /// </summary>
         private double Lehmer()
         {
-            seed = (A * seed) % M;
-            return seed / M;
+            seed = (A_1 * seed + B_1) % C_1;
+            return seed / C_1;
         }
 
         /// <summary>
