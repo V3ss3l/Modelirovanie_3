@@ -74,7 +74,7 @@ namespace Modelirovanie_3
             for (int i = 0; i < lenOfSeq; i++)
             {
                 if (_mainForm.RandomType) number = rand.Next(100);
-                else number = LehmerN(100);
+                else number = LehmerN(99);
                 arrM[number]++;
             }
 
@@ -108,18 +108,22 @@ namespace Modelirovanie_3
         {
             double mathExpected1 = 0;
             double mathExpected2 = 0;
+            double dsp = 0;
             for (var xi = 0; xi < arrM.Length; xi++)
             {
                 var p = arrM[xi] / lenOfSeq;
                 mathExpected1 += xi * p;
-                mathExpected2 += xi * xi * p;
+                //mathExpected2 += xi * xi * p;
             }
-
-            var dsp = mathExpected2 - mathExpected1 * mathExpected1;
+            for (int x = 0; x < arrM.Length; x++)
+            {
+                var p = arrM[x] / lenOfSeq;
+                dsp += DispersionOfSequence(mathExpected1, x, p);
+            }
             return new[] { mathExpected1, dsp };
         }
 
-        //private double DispersionOfSequence(double ExpectedValue, int Xi, double Pi) => Math.Pow(Xi - ExpectedValue, 2) * Pi;
+        private double DispersionOfSequence(double ExpectedValue, double Xi, double Pi) => Math.Pow(Xi - ExpectedValue, 2) * Pi;
 
         /// <summary>
         /// Метод генерирующий числа по алгоритму Лемера в пределах [0;1)
@@ -127,6 +131,7 @@ namespace Modelirovanie_3
         private double Lehmer()
         {
             seed = (A_1 * seed + B_1) % C_1;
+            
             return seed / C_1;
         }
 
@@ -137,6 +142,6 @@ namespace Modelirovanie_3
         /// <returns></returns>
         private int LehmerN(int N) => (int)(N * Lehmer());
 
-        private double Circle(double x, double y) => Math.Sqrt(Math.Pow(x, 2) + Math.Pow(y,2));
+        private double Circle(double x, double y) => Math.Pow(x, 2) + Math.Pow(y,2);
     }
 }    

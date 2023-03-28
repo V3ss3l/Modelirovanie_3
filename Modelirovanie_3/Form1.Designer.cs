@@ -101,7 +101,7 @@
             this.numericForPi.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.numericForPi.Location = new System.Drawing.Point(10, 735);
             this.numericForPi.Maximum = new decimal(new int[] {
-            10000,
+            10000000,
             0,
             0,
             0});
